@@ -41,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
     mproviderW = context.watch<MusicProvider>();
     return Scaffold(
       appBar: AppBar(
-        title: Text("Media_Bossterß"),
+        title: const Text("Media_Bossterß"),
       ),
       body: Column(
         children: [
@@ -67,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   pageController = PageController(initialPage: index);
                 },
               )),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           SmoothPageIndicator(
@@ -87,14 +87,14 @@ class _HomeScreenState extends State<HomeScreen> {
               icon:
                   // providerW!.choice == false
                   //     ?
-                  Icon(Icons.play_arrow)
+                  const Icon(Icons.play_arrow)
               // : Icon(Icons.stop)
               ),
           ElevatedButton(
               onPressed: () {
                 Navigator.pushNamed(context, 'music');
               },
-              child: Text("Music")),
+              child: const Text("Music")),
           Expanded(
             child: ListView.builder(
               itemCount: mproviderW!.allMusic.length,
@@ -105,7 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: 80,
                       width: MediaQuery.sizeOf(context).width,
                       alignment: Alignment.center,
-                      decoration: BoxDecoration(color: Colors.grey.shade300,borderRadius: BorderRadius.all(Radius.circular(10))),
+                      decoration: BoxDecoration(color: Colors.grey.shade300,borderRadius: const BorderRadius.all(Radius.circular(10))),
                       child: ListTile(
                         leading: Image.network("${mproviderR!.allMusic[index].image}"),
                         title: Text("${mproviderR!.allMusic[index].title}"),
@@ -115,7 +115,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         },
                       ),
                     ),
-                    Divider(),
+                    const Divider(),
 
                   ],
                 );

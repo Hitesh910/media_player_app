@@ -30,11 +30,11 @@ class _MusicScreenState extends State<MusicScreen> {
       body: Stack(
         // alignment: Alignment.center,
         children: [
-          // Spacer(),
+          //Spacer(),
           Container(
             height: MediaQuery.sizeOf(context).height,
             width: MediaQuery.sizeOf(context).width,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               boxShadow: [BoxShadow(spreadRadius: 10, blurRadius: 20)],
               gradient: LinearGradient(
                 tileMode: TileMode.mirror,
@@ -44,23 +44,23 @@ class _MusicScreenState extends State<MusicScreen> {
               ),
             ),
           ),
-          Spacer(),
+          // Spacer(),
           Column(
             children: [
-              Spacer(),
+              const Spacer(),
               Container(
                 height: 200,
                 width: 200,
                 // color: Colors.white,
                 decoration: BoxDecoration(
                     color: Colors.white,
-                    boxShadow: [BoxShadow(blurRadius: 10, spreadRadius: -5)],
-                    borderRadius: BorderRadius.all(Radius.circular(8)),
+                    boxShadow: const [BoxShadow(blurRadius: 10, spreadRadius: -5)],
+                    borderRadius: const BorderRadius.all(Radius.circular(8)),
                     image: DecorationImage(
                         image: NetworkImage(
                             "${providerR!.allMusic[providerR!.index!].image}"))),
               ),
-              Spacer(),
+              const Spacer(),
               Slider(
                 value: providerW!.currentDuration.inSeconds.toDouble(),
                 max: providerW!.endDuration.inSeconds.toDouble(),
@@ -75,11 +75,11 @@ class _MusicScreenState extends State<MusicScreen> {
                   children: [
                     Text(
                       "${providerW!.currentDuration}",
-                      style: TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.white),
                     ),
                     Text(
                       "${providerW!.endDuration}",
-                      style: TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.white),
                     )
                   ],
                 ),
@@ -89,58 +89,58 @@ class _MusicScreenState extends State<MusicScreen> {
                 children: [
                   IconButton(
                       onPressed: () {},
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.shuffle,
                         color: Colors.white,
                       )),
-                  Spacer(),
+                  const Spacer(),
                   IconButton(
                       onPressed: () {
                       },
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.skip_previous,
                         color: Colors.white,
                         size: 50,
                       )),
                   IconButton.filled(
-                      style: ButtonStyle(
+                      style: const ButtonStyle(
                         backgroundColor: WidgetStatePropertyAll(Colors.white),
                       ),
                       onPressed: () {
                         providerW!.plyAndPause();
                       },
                       icon: providerW!.isPlay
-                          ? Icon(
+                          ? const Icon(
                               Icons.play_arrow,
                               color: Colors.deepPurple,
                               size: 50,
                             )
-                          : Icon(
+                          : const Icon(
                               Icons.pause,
                               color: Colors.deepPurple,
                               size: 50,
                             )),
                   IconButton(
                       onPressed: () {},
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.skip_next,
                         color: Colors.white,
                         size: 50,
                       )),
-                  Spacer(),
+                  const Spacer(),
                   IconButton(
                       onPressed: () {},
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.loop,
                         color: Colors.white,
                       ))
                 ],
               ),
               // Row(children: [Text("00:00:00"),Text("00:00:00")],),
-              SizedBox(
+              const SizedBox(
                 height: 40,
               )
-              // Slider(
+              // // Slider(
               //   value: 0.5,
               //   onChanged: (value) {},
               // )
