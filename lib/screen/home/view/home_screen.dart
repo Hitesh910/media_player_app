@@ -2,6 +2,7 @@ import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:media_bosster_app/screen/home/model/home_model.dart';
+import 'package:media_bosster_app/screen/music/provider/music_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 // import 'package:media_bosster_app/utils/import.dart';
@@ -18,6 +19,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   HomeProvider? providerR;
   HomeProvider? providerW;
+  MusicProvider? mproviderR;
+  MusicProvider? mproviderW;
   PageController pageController =
       PageController(viewportFraction: 0.8, keepPage: true);
   AssetsAudioPlayer assetsAudio = AssetsAudioPlayer();
@@ -27,13 +30,15 @@ class _HomeScreenState extends State<HomeScreen> {
     // TODO: implement initState
     super.initState();
     // context.read<HomeProvider>().initAudio();
-     assetsAudio.open(Audio("assets/audio/audio1.mp3"));
+    //  assetsAudio.open(Audio("assets/audio/audio1.mp3"));
   }
 
   @override
   Widget build(BuildContext context) {
     providerR = context.read<HomeProvider>();
     providerW = context.watch<HomeProvider>();
+    mproviderR = context.read<MusicProvider>();
+    mproviderW = context.watch<MusicProvider>();
     return Scaffold(
       appBar: AppBar(
         title: Text("Media_Bossterß"),
@@ -75,16 +80,48 @@ class _HomeScreenState extends State<HomeScreen> {
                 // // assetsAudio.
                 // providerW!.songRun(true);
                 // providerW!.choice == true
-                     assetsAudio.play();
+                //      assetsAudio.play();
                 //     : providerR!.assetsAudio.stop();
                 // print(providerW!.choice);
               },
               icon:
-              // providerW!.choice == false
-              //     ?
-              Icon(Icons.play_arrow)
-                  // : Icon(Icons.stop)
-    )
+                  // providerW!.choice == false
+                  //     ?
+                  Icon(Icons.play_arrow)
+              // : Icon(Icons.stop)
+              ),
+          ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, 'music');
+              },
+              child: Text("Music")),
+          Expanded(
+            child: ListView.builder(
+              itemCount: mproviderW!.allMusic.length,
+              itemBuilder: (context, index) {
+              return  Column(
+                  children: [
+                    Container(
+                      height: 80,
+                      width: MediaQuery.sizeOf(context).width,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(color: Colors.grey.shade300,borderRadius: BorderRadius.all(Radius.circular(10))),
+                      child: ListTile(
+                        leading: Image.network("${mproviderR!.allMusic[index].image}"),
+                        title: Text("${mproviderR!.allMusic[index].title}"),
+                        onTap: () {
+                          mproviderR!.checkIndex(index);
+                          Navigator.pushNamed(context, 'music');
+                        },
+                      ),
+                    ),
+                    Divider(),
+
+                  ],
+                );
+              },
+            ),
+          )
         ],
       ),
     );
