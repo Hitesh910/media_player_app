@@ -1,10 +1,10 @@
-// import 'package:assets_audio_player/assets_audio_player.dart';
-// import 'package:carousel_slider/carousel_slider.dart';
-// import 'package:flutter/material.dart';
-// import 'package:media_bosster_app/screen/home/model/home_model.dart';
-// import 'package:provider/provider.dart';
-// import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:media_bosster_app/utils/import.dart';
+import 'package:assets_audio_player/assets_audio_player.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/material.dart';
+import 'package:media_bosster_app/screen/home/model/home_model.dart';
+import 'package:provider/provider.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+// import 'package:media_bosster_app/utils/import.dart';
 
 import '../provider/home_provider.dart';
 
