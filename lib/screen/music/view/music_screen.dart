@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -34,16 +36,44 @@ class _MusicScreenState extends State<MusicScreen> {
           Container(
             height: MediaQuery.sizeOf(context).height,
             width: MediaQuery.sizeOf(context).width,
-            decoration: const BoxDecoration(
-              boxShadow: [BoxShadow(spreadRadius: 10, blurRadius: 20)],
-              gradient: LinearGradient(
-                tileMode: TileMode.mirror,
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [Color(0xff605C3C), Color(0xff3C3B3F)],
+            decoration:  BoxDecoration(
+              image: DecorationImage(
+                  image: NetworkImage(
+                      "${providerW!.allMusic[providerW!.index].image}",),fit: BoxFit.fitHeight),
+              // gradient: LinearGradient(
+              //   tileMode: TileMode.mirror,
+              //   begin: Alignment.topLeft,
+              //   end: Alignment.bottomRight,
+              //   colors: [Color(0xff605C3C), Color(0xff3C3B3F)],
+              // ),
+            ),
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
+              child: Container(
+                decoration: BoxDecoration(color: Colors.black.withOpacity(0.1)),
               ),
             ),
           ),
+          // Container(
+          //   height: MediaQuery.sizeOf(context).height,
+          //   width: MediaQuery.sizeOf(context).width,
+          //   decoration: const BoxDecoration(
+          //     color: Colors.white,
+          //     boxShadow: [BoxShadow(spreadRadius: 10, blurRadius: 20)],
+          //     // gradient: LinearGradient(
+          //     //   tileMode: TileMode.mirror,
+          //     //   begin: Alignment.topLeft,
+          //     //   end: Alignment.bottomRight,
+          //     //   colors: [Color(0xff605C3C), Color(0xff3C3B3F)],
+          //     // ),
+          //   ),
+          //   child: BackdropFilter(
+          //     filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+          //     child: Container(
+          //       decoration: BoxDecoration(color: Colors.white.withOpacity(0.0)),
+          //     ),
+          //   ),
+          // ),
           // Spacer(),
           Column(
             children: [
@@ -54,11 +84,13 @@ class _MusicScreenState extends State<MusicScreen> {
                 // color: Colors.white,
                 decoration: BoxDecoration(
                     color: Colors.white,
-                    boxShadow: const [BoxShadow(blurRadius: 10, spreadRadius: -5)],
+                    boxShadow: const [
+                      BoxShadow(blurRadius: 10, spreadRadius: -5)
+                    ],
                     borderRadius: const BorderRadius.all(Radius.circular(8)),
                     image: DecorationImage(
                         image: NetworkImage(
-                            "${providerR!.allMusic[providerR!.index!].image}"))),
+                            "${providerW!.allMusic[providerW!.index].image}"))),
               ),
               const Spacer(),
               Slider(
@@ -95,7 +127,9 @@ class _MusicScreenState extends State<MusicScreen> {
                       )),
                   const Spacer(),
                   IconButton(
-                      onPressed: () {
+                      onPressed: () async {
+                        await providerW!.assetsAudio.previous();
+                        providerR!.endDurationSong();
                       },
                       icon: const Icon(
                         Icons.skip_previous,
@@ -121,7 +155,12 @@ class _MusicScreenState extends State<MusicScreen> {
                               size: 50,
                             )),
                   IconButton(
-                      onPressed: () {},
+                      onPressed: () async {
+                        await providerW!.assetsAudio.next();
+                        providerR!.endDurationSong();
+                        providerW!.nextIndex(providerW!.index!);
+                        providerW!.isPlay = false;
+                      },
                       icon: const Icon(
                         Icons.skip_next,
                         color: Colors.white,
