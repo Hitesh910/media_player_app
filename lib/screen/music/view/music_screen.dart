@@ -1,9 +1,10 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:media_bosster_app/screen/home/provider/home_provider.dart';
 import 'package:provider/provider.dart';
 
-import '../provider/music_provider.dart';
+import '../../provider/music_provider.dart';
 
 class MusicScreen extends StatefulWidget {
   const MusicScreen({super.key});
@@ -18,7 +19,6 @@ class _MusicScreenState extends State<MusicScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     context.read<MusicProvider>().initAudio();
   }
@@ -39,7 +39,7 @@ class _MusicScreenState extends State<MusicScreen> {
             decoration:  BoxDecoration(
               image: DecorationImage(
                   image: NetworkImage(
-                      "${providerW!.allMusic[providerW!.index].image}",),fit: BoxFit.fitHeight),
+                      "${providerW!.allList[context.read<HomeProvider>().aIndex][providerW!.index].image}",),fit: BoxFit.fitHeight),
               // gradient: LinearGradient(
               //   tileMode: TileMode.mirror,
               //   begin: Alignment.topLeft,
@@ -90,7 +90,7 @@ class _MusicScreenState extends State<MusicScreen> {
                     borderRadius: const BorderRadius.all(Radius.circular(8)),
                     image: DecorationImage(
                         image: NetworkImage(
-                            "${providerW!.allMusic[providerW!.index].image}"))),
+                            "${providerW!.allList[context.read<HomeProvider>().aIndex][providerW!.index].image}"))),
               ),
               const Spacer(),
               Slider(
@@ -130,6 +130,8 @@ class _MusicScreenState extends State<MusicScreen> {
                       onPressed: () async {
                         await providerW!.assetsAudio.previous();
                         providerR!.endDurationSong();
+                        providerW!.previousIndex(providerW!.index);
+                        providerR!.isPlay = false;
                       },
                       icon: const Icon(
                         Icons.skip_previous,

@@ -5,6 +5,15 @@ class HomeProvider with ChangeNotifier {
   int? cIndex;
    // AssetsAudioPlayer assetsAudio = AssetsAudioPlayer();
   bool choice = true;
+  int selectIndex = 0;
+  int aIndex= 0;
+
+  List<String> imageAlbum = [
+    "https://c.saavncdn.com/editorial/PopMeinTop_20240701103058_150x150.jpg",
+    "https://c.saavncdn.com/505/Husn-Irani-From-Wild-Wild-Punjab-Hindi-2024-20240627151003-150x150.jpg",
+    "https://c.saavncdn.com/editorial/Hindi-IndiaSuperhitsTop50_20240705025241_150x150.jpg",
+    "https://c.saavncdn.com/editorial/BestOfIndieHindi_20240624065052_150x150.jpg",
+  ];
 
   // List<String> imageCarsoul = [
   //   "assets/images/image1.jpg",
@@ -45,6 +54,18 @@ class HomeProvider with ChangeNotifier {
   void songRun()
   {
     choice = !choice;
+    notifyListeners();
+  }
+
+  void bottomIndex(int value)
+  {
+    selectIndex = value;
+    notifyListeners();
+  }
+
+  void albumIndex(int index)
+  {
+    aIndex = index;
     notifyListeners();
   }
 }

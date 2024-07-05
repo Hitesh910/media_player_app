@@ -1,8 +1,10 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:media_bosster_app/screen/dash/view/dash_screen.dart';
 import 'package:media_bosster_app/screen/home/model/home_model.dart';
-import 'package:media_bosster_app/screen/music/provider/music_provider.dart';
+import 'package:media_bosster_app/screen/provider/music_provider.dart';
+import 'package:media_bosster_app/screen/video/view/video_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 // import 'package:media_bosster_app/utils/import.dart';
@@ -40,6 +42,49 @@ class _HomeScreenState extends State<HomeScreen> {
     mproviderR = context.read<MusicProvider>();
     mproviderW = context.watch<MusicProvider>();
     return Scaffold(
+      // appBar: AppBar(
+      //   title: Text("Media Bosster"),
+      // ),
+      body: Column(
+        children: [
+          providerW!.selectIndex == 0
+          ?Expanded(child: DashScreen())
+              :Expanded(child: VideoScreen())
+        ],
+      ),
+      bottomNavigationBar: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(height: 50,width: MediaQuery.sizeOf(context).width,color: Colors.red,child: ListTile(
+        leading: Image.network(
+            "${mproviderR!.allList[providerR!.aIndex][mproviderW!.index].image}"),
+        title: Text("${mproviderR!.allList[providerR!.aIndex][mproviderW!.index].title}"),
+        onTap: () {
+          // mproviderR!.checkIndex(mindex);
+          Navigator.pushNamed(context, 'music');
+        },
+      ),),
+          BottomNavigationBar(
+            currentIndex: providerW!.selectIndex,
+            onTap: (value) {
+              providerR!.bottomIndex(value);
+              // mproviderR!.songIndex(value);
+            },
+            items: [
+              BottomNavigationBarItem(icon: Icon(Icons.music_note), label: "Music"),
+              BottomNavigationBarItem(icon: IconButton.filledTonal(icon: Icon(Icons.add), onPressed: () {  },), label: "Music"),
+
+              BottomNavigationBarItem(icon: Icon(Icons.video_camera_back_rounded),label: "Video"),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+// Scaffold//
+/*
+* Scaffold(
       appBar: AppBar(
         title: const Text("Media_Bossterß"),
       ),
@@ -124,6 +169,4 @@ class _HomeScreenState extends State<HomeScreen> {
           )
         ],
       ),
-    );
-  }
-}
+    );*/
